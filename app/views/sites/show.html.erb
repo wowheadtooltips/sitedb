@@ -1,0 +1,38 @@
+<p>
+  <b> id:</b>
+  <%=h @site.id %>
+</p>
+ 
+<p>
+  <b>Uri:</b>
+  <%=h @site.uri %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @site.name %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%=h @site.region %>
+</p>
+
+<p>
+  <b>Realm:</b>
+  <%=h @site.realm %>
+</p>
+
+<p>
+  <b>Faction:</b>
+  <%=h @site.faction %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%=h @site.count %>
+</p>
+
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>

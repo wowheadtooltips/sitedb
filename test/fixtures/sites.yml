@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+   id: 1
+  uri: MyString
+  name: MyString
+  region: MyString
+  realm: MyString
+  faction: MyString
+  count: 1
+
+two:
+   id: 1
+  uri: MyString
+  name: MyString
+  region: MyString
+  realm: MyString
+  faction: MyString
+  count: 1

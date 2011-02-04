@@ -1,0 +1,40 @@
+<h1>Editing site</h1>
+
+<% form_for(@site) do |f| %>
+  <%= f.error_messages %>
+ 
+  <p>
+    <%= f.label :id %><br />
+    <%= f.text_field :id %>
+  </p>
+  <p>
+    <%= f.label :uri %><br />
+    <%= f.text_field :uri %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :region %><br />
+    <%= f.text_field :region %>
+  </p>
+  <p>
+    <%= f.label :realm %><br />
+    <%= f.text_field :realm %>
+  </p>
+  <p>
+    <%= f.label :faction %><br />
+    <%= f.text_field :faction %>
+  </p>
+  <p>
+    <%= f.label :count %><br />
+    <%= f.text_field :count %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @site %> |
+<%= link_to 'Back', sites_path %>

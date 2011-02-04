@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Website</th>
+		<th>Region</th>
+		<th>Realm</th>
+		<th>Faction</th>
+		<th>Count</th>
+		<th>Controls</th>
+	</tr>
+
+	<% @sites.each do |site| %>
+		<tr class="<%= cycle('odd', 'even') %>">
+			<td align="center"><%=h site.id %></td>
+			<td align="left"><%=h link_to site.name.gsub("\\", ""), site.uri %></td>
+			<td align="center"><%= site.region %></td>
+			<td align="center"><%=h site.realm.gsub("\\", "") %></td>
+			<td align="center"><%= site.faction %></td>
+			<td align="center"><%= site.count %></td>
+			<td align="center">
+				<%= link_to 'Edit', edit_site_path(site) %>&nbsp;
+				<%= link_to 'Delete', site, :confirm => 'Are you sure?', :method => :delete %>
+			</td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,23 @@
+<table>
+	<tr>
+		<th>Website</th>
+		<th>Region</th>
+		<th>Realm</th>
+		<th>Faction</th>
+		<th>Count</th>
+	</tr>
+
+	<% @sites.each do |site| %>
+		<tr class="<%= cycle('odd', 'even') %>">
+			<td align="left"><%= link_to site.name.gsub('\\', ''), { :action => 'out', :id => site.id } %></td>
+			<td align="center"><%= site.region %></td>
+			<td align="center"><%= site.realm.gsub('\\', '') %></td>
+			<td align="center"><%= site.faction %></td>
+			<td align="center"><%= site.count %></td>
+		</tr>
+	<% end %>
+</table>
+<br />
+<%= page_entries_info @sites %>
+<%= will_paginate @sites %>
+<br />

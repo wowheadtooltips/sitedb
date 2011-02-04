@@ -1,0 +1,35 @@
+<div class="sitedb-form">
+	<% form_for :site, :url => { :action => :save } do |form| %>
+		<fieldset>
+			<legend>Please Enter Your Site Details</legend>
+			
+			<div>
+				<%= form.label :name, 'Site Name:' %>
+				<%= form.text_field :name, :size => 40 %>
+			</div>
+			<div>
+				<%= form.label :uri, 'Site URL:' %>
+				<%= form.text_field :uri %>
+			</div>
+			<div>
+				<%= form.label :region, 'Region:' %>
+				<%= form.select :region, Site::ACCEPT_REGION, :prompt => "Select a region" %>
+			</div>
+			<div>
+				<%= form.label :realm, 'Realm:' %>
+				<%= form.text_field :realm %>
+			</div>
+			<div>
+				<%= form.label :faction, 'Faction:' %>
+				<%= form.select :faction, Site::ACCEPT_FACTION, :prompt => "Select a faction" %>
+			</div>
+			
+			<%= submit_tag "Add Site!", :class => "submit" %>
+			<%= submit_tag "Reset", { :name => 'reset', :class => "reset", :type => "reset" } %>
+			<br /><br />
+		</fieldset>
+	<% end %>
+	<br />
+	<%= link_to 'Go Back', :action => 'index' %>
+	<br /><br />
+</div>
