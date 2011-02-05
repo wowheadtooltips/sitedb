@@ -143,7 +143,7 @@ code {
 	margin:10px 0;
 }
 
-/* default forms */
+/* default forms
 form {}
 form input, form textarea, form select {
 	border:2px solid #dddddd;
@@ -159,12 +159,14 @@ form input.formbutton {
 	border:1px solid #5E0000;
 	font-weight:bold;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
-}
+} */
 .sitedb-form legend {
-	font: bold smaller Arial, Helvetica, sans-serif;
-	padding: 0.2em 1em;
-	background-color: #000;
 	color: #fff;
+	background: #000;
+	padding: 0.2em 1em;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: smaller;
 	margin-left: 15px;
 }
 .sitedb-form fieldset {
@@ -177,20 +179,21 @@ form input.formbutton {
 	padding-top: 0.2em;
 	margin-right: 0.1em;
 	display: block;
-	margin-left: 20em;
-	font: bold large Arial, Helvetica, sans-serif;
+	font-weight: bold;
 }
-.sitedb-form select, .sitedb-form textarea, .sitedb-form input {
+.sitedb-form select, .sitedb-form textarea, .sitedb-form input, .sitedb-form password {
 	margin-left: 0.5em;
 	width: 250px;
+	border:2px solid #dddddd;
+	padding:5px;
+	color:#666666;
 }
 .sitedb-form .submit, .sitedb-form .reset {
 	margin-left: 4em;
-	font-weight: bold;
+	width: 150px;
 }
 .sitedb-form div {
 	margin: 0.5em 0;
-	clear: both;
 }
 
 /* default tables */ 

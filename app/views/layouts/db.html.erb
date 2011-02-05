@@ -18,7 +18,7 @@
 				<li><%= link_to 'Home', 'http://wowhead-tooltips.com' %></li>
 				<li><%= link_to 'Support Forums', 'http://support.wowhead-tooltips.com' %></li>
 				<li><%= link_to 'Documentation Wiki', 'http://wiki.wowhead-tooltips.com' %></li>
-				<li><%= link_to 'Add Your Site!', :action => 'add' %></li>
+				<li><%= link_to 'Add Your Site!', {:controller => 'db', :action => 'add'} %></li>
 			</ul>
 		</div>
 		<div class="clear"></div>
@@ -29,9 +29,9 @@
 			<div class="page">
 				<div class="content">
 					<div align="center">
-						<% if flash[:notice] -%>
+						<% if flash[:notice] %>
 							<div id="notice"><%= flash[:notice] %></div>
-						<% end -%>
+						<% end %>
 						<%= yield :layout %>
 					</div>
 				</div>

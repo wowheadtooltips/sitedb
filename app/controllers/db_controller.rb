@@ -30,4 +30,8 @@ private
 		flash[:notice] = msg if msg
 		redirect_to :action => 'index'
 	end
+
+protected
+	def authorize
+	end
 end
