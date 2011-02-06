@@ -32,9 +32,9 @@
 				<li><%= link_to 'Home', 'http://wowhead-tooltips.com' %></li>
 				<li><%= link_to 'Support Forums', 'http://support.wowhead-tooltips.com' %></li>
 				<li><%= link_to 'Documentation Wiki', 'http://wiki.wowhead-tooltips.com' %></li>
-				<li><%= link_to 'Add Your Site!', {:controller => 'db', :action => 'add'} %></li>
+				<li><%= link_to 'Add Your Site', new_url %></li>
 				<% if session[:user_id] %>
-					<li><%= link_to 'Logout', logout_url() %></li>
+					<li><%= link_to 'Logout', logout_url %></li>
 				<% end %>
 			</ul>
 		</div>
@@ -53,7 +53,14 @@
 					</div>
 				</div>
 				<div class="footer">
-					<p>&copy; 2011 <%= link_to 'Wowhead Tooltips', 'http://wowhead-tooltips.com' %>, <%= link_to 'Wowhead', 'http://wowhead.com' %> name used with permission.<br />Powered by <%= link_to 'Ruby on Rails', 'http://rubyonrails.org' %><br /><a href="http://validator.w3.org/check/referer" title="valid XHTML">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="valid CSS">CSS</a></p> 
+					<p>
+						&copy; 2011 <%= link_to 'Wowhead Tooltips', 'http://wowhead-tooltips.com' %>, <%= link_to 'Wowhead', 'http://wowhead.com' %> name used with permission.<br />
+						Powered by <%= link_to 'Ruby on Rails', 'http://rubyonrails.org' %><br />
+						<a href="http://validator.w3.org/check/referer" title="valid XHTML">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="valid CSS">CSS</a>
+						<% if session[:user_id] %>
+							<br /><strong>Manage:</strong>&nbsp;<%= link_to 'Sites', {:controller => 'sites', :action => 'index' } %>&nbsp;|&nbsp;<%= link_to 'Users', {:controller => 'users', :action => 'index'} %>
+						<% end %>
+					</p> 
 				</div>
 			</div>
 		</div>

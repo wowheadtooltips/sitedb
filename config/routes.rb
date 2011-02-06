@@ -46,8 +46,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
   
   # custom routes
-  map.search "search", {:controller => 'db', :action => 'search'}
-  map.out 'out/:id', :controller =>'db', :action => 'out'
-  map.sort 'sort/:id', :controller => 'db', :action => 'sort'
-  map.logout 'logout', :controller => 'admin', :action => 'logout'
+  map.search "search", {:controller => 'db', :action => 'search'}	# searching
+  map.out 'out/:id', :controller =>'db', :action => 'out'			# redirect
+  map.sort 'sort/:id', :controller => 'db', :action => 'sort'		# sorting
+  map.logout 'logout', :controller => 'admin', :action => 'logout'	# admin logout
+  map.new 'new', :controller => 'db', :action => 'add'				# add new site
 end
