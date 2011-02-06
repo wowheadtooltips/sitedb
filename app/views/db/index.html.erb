@@ -1,3 +1,21 @@
+<div style="float:left;display:inline;padding-left:3px;">
+	<% (97..122).to_a.each do |letter| %>
+		<%=
+			link_to_unless(Site.first_letter(letter.chr) == 0, letter.chr.upcase, sort_url(letter.chr), :title => "#{Site.first_letter(letter.chr)} sites") do
+				letter.chr.upcase
+			end
+		%>
+		&nbsp;|&nbsp;
+	<% end %>
+	<%= link_to "Reset", {:action => 'index'} %>
+</div>
+<div id="search" style="float:right;display:inline;padding-right:3px;">
+	<% form_tag(search_path, :method => 'get') do %>
+		<%= text_field_tag(:search) %>
+		<%= submit_tag "", :class => 'submit_search' %>
+	<% end %>
+</div>
+<br /><br />
 <table>
 	<tr>
 		<th>Website</th>
@@ -9,7 +27,7 @@
 
 	<% @sites.each do |site| %>
 		<tr class="<%= cycle('odd', 'even') %>">
-			<td align="left"><%= link_to site.name.gsub('\\', ''), { :action => 'out', :id => site.id } %></td>
+			<td align="left"><%= link_to site.name.gsub('\\', ''), out_url(site.id) %></td>
 			<td align="center"><%= site.region %></td>
 			<td align="center"><%= site.realm.gsub('\\', '') %></td>
 			<td align="center"><%= site.faction %></td>

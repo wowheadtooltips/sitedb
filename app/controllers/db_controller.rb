@@ -25,6 +25,16 @@ class DbController < ApplicationController
 		end
 	end
 	
+	def sort
+		page = params[:page] || 1
+		@sites = Site.paginate(:page => page, :conditions => ['LOWER (name) LIKE ?', "#{params[:id].downcase}%"], :order => 'name ASC')
+	end
+	
+	def search
+		page = params[:page] || 1
+		@sites = Site.paginate(:page => page, :conditions => ['LOWER (name) LIKE ?', "%#{params[:search].downcase}%"], :order => 'name ASC')
+	end
+	
 private
 	def redirect_to_index(msg = nil)
 		flash[:notice] = msg if msg

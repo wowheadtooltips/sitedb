@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Wowhead Tooltips | Site Database</title>
+	<link rel="shortcut icon" href="/favicon.ico" />
 	<%= stylesheet_link_tag 'base', :media => 'all' %>
 	<%= javascript_include_tag :defaults %>
 </head>
@@ -11,7 +12,7 @@
 <div id="wrap">
 	<div class="header">
 		<div class="title">
-			<h1 style="padding-left:165px;">Site Database</h1>
+			<h1 style="padding-left:165px;"><%= link_to 'Site Database', root_url %></h1>
 		</div>
 		<div class="nav">
 			<ul>
@@ -20,7 +21,7 @@
 				<li><%= link_to 'Documentation Wiki', 'http://wiki.wowhead-tooltips.com' %></li>
 				<li><%= link_to 'Add Your Site!', {:controller => 'db', :action => 'add'} %></li>
 				<% if session[:user_id] %>
-					<li><%= link_to 'Logout', {:controller => 'admin', :action => 'logout'} %></li>
+					<li><%= link_to 'Logout', logout_url() %></li>
 				<% end %>
 			</ul>
 		</div>

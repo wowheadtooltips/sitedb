@@ -195,6 +195,35 @@ form input.formbutton {
 .sitedb-form div {
 	margin: 0.5em 0;
 }
+div#search {
+	background-color: white;
+	background-position: left top;
+	background-repeat: repeat-x;
+	border: 1px solid #AAAAAA;
+	margin-top: 0.65em;
+	min-height: 1px;
+}
+.submit_search {
+	background-image: url(../images/search.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: transparent;
+	border: medium none;
+	cursor: pointer;
+	font-size: x-small;
+	margin: 0 5px;
+	padding: 0;
+	width: 20px;
+}
+input#search {
+	background-color: transparent;
+	border-width: 0;
+	font-size: 13px;
+	margin: 0;
+	padding: 3px;
+	vertical-align: top
+	width: 14em;
+}
 
 /* default tables */ 
 table {

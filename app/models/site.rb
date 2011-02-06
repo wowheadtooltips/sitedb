@@ -18,4 +18,9 @@ class Site < ActiveRecord::Base
 	validates_format_of :uri, :with => URI::regexp(%w(http https))
 	validates_inclusion_of :faction, :in => ACCEPT_FACTION.map {|disp, value| value}
 	validates_inclusion_of :region, :in => ACCEPT_REGION.map {|disp, value| value}
+		
+	def self.first_letter(letter)
+		@sites = self.find(:all, :conditions => ['LOWER (name) LIKE ?', "#{letter.downcase}%"], :order => 'name ASC')
+		@sites.count
+	end
 end
