@@ -4,3 +4,4 @@ tmp/**/*
 tmp/restart.txt
 config/database.yml
 ./update_git
+./restart

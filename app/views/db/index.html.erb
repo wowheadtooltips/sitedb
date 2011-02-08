@@ -18,11 +18,11 @@
 <br /><br />
 <table>
 	<tr>
-		<th>Website</th>
-		<th>Region</th>
-		<th>Realm</th>
-		<th>Faction</th>
-		<th>Count</th>
+		<th><%= sortable "name", "Website" %></th>
+		<th><%= sortable "region" %></th>
+		<th><%= sortable "realm" %></th>
+		<th><%= sortable "faction" %></th>
+		<th><%= sortable "count" %></th>
 	</tr>
 
 	<% @sites.each do |site| %>

@@ -51,4 +51,7 @@ ActionController::Routing::Routes.draw do |map|
   map.sort 'sort/:id', :controller => 'db', :action => 'sort'		# sorting
   map.logout 'logout', :controller => 'admin', :action => 'logout'	# admin logout
   map.new 'new', :controller => 'db', :action => 'add'				# add new site
+  map.home 'home', :controller => 'db', :action => 'gohome'			# goto the homepage
+  map.forums 'forums', :controller => 'db', :action => 'forums'		# goto the forums
+  map.wiki 'wiki', :controller => 'db', :action => 'wiki'			# goto the documentation wiki
 end
