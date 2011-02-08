@@ -65,6 +65,7 @@ private
 	end
 
 protected
+	# to prevent the filter from requiring login
 	def authorize
 	end
 end
