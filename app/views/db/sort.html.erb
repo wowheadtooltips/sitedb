@@ -9,7 +9,7 @@
 	<% end %>
 	<%= link_to "Reset", {:action => 'index'} %>
 </div>
-<div id="search" style="float:right;display:inline;padding-right:3px;">
+<div id="dosearch" style="float:right;display:inline;padding-right:3px;">
 	<% form_tag(search_path, :method => 'get') do %>
 		<%= text_field_tag(:search) %>
 		<%= submit_tag "", :class => 'submit_search' %>
