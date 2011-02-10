@@ -27,9 +27,9 @@
 	
 		<% @sites.each do |site| %>
 			<tr class="<%= cycle('odd', 'even') %>">
-				<td align="left"><%= link_to site.name.gsub('\\', ''), out_url(site.id) %></td>
+				<td align="left"><%= link_to site.name.gsub('\\', '').titleize, out_url(site.id) %></td>
 				<td align="center"><%= site.region %></td>
-				<td align="center"><%= site.realm.gsub('\\', '') %></td>
+				<td align="center"><%= site.realm.gsub('\\', '').titleize %></td>
 				<td align="center"><%= site.faction %></td>
 				<td align="center"><%= site.count %></td>
 			</tr>

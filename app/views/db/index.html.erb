@@ -1,19 +1,16 @@
 <div style="float:left;display:inline;padding-left:3px;">
 	<% (97..122).to_a.each do |letter| %>
-		<%=
-			link_to_unless(Site.first_letter(letter.chr) == 0, letter.chr.upcase, sort_url(letter.chr), :title => "#{Site.first_letter(letter.chr)} sites") do
-				letter.chr.upcase
-			end
-		%>
+		<%= sort_first_character(letter.chr) %>
 		&nbsp;|&nbsp;
 	<% end %>
-	<%= link_to "Reset", {:action => 'index'} %>
+	<%= link_to "Reset", {:action => 'index'} %>&nbsp;
+	<%= image_tag "spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
 </div>
 <div id="dosearch" style="float:right;display:inline;padding-right:3px;">
 	<form name="sform" action="" method="get" style="display:inline;">
 		<%= text_field_tag(:query, params['query'], :size => 10, :id => 'query' ) %>
 	</form>
-	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style =>"display: none;" ) %>
+	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
 </div>
 <br /><br />
 <%= observe_field 'query', :frequency => 1, :update => 'table', :before => "jQuery('#spinner').show()", :success => "jQuery('#spinner').hide()", :url => {:action => 'index'}, :with => 'query' %>

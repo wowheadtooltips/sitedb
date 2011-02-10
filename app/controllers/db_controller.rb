@@ -1,5 +1,7 @@
 class DbController < ApplicationController
 	def index
+		
+		# for column sorting
 		sort = case params[:sort]
 			when 'name' then 'name ASC'
 			when 'region' then 'region ASC'
@@ -18,7 +20,11 @@ class DbController < ApplicationController
 		params[:page] = 1 if params[:page].nil?
 		
 		# for searches
-		conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
+		if params[:filter].nil?
+			conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
+		else
+			conditions = ["name LIKE ?", "#{params[:filter]}%"]
+		end
 
 		# pull the sites from the database
 		@total = Site.count(:conditions => conditions)

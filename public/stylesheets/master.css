@@ -214,8 +214,8 @@ div#dosearch {
 	background-position: left top;
 	background-repeat: repeat-x;
 	border: 1px solid #AAAAAA;
-	margin-top: 0.65em;
 	min-height: 1px;
+	display: inline;
 }
 .submit_search {
 	background-image: url(../images/search.png);

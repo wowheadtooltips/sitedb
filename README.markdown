@@ -22,4 +22,13 @@ This is the site database application used at <http://sitedb.wowhead-tooltips.co
 5. **OPTIONAL** Create a user using `ruby script/console`.  This will allow you to manage the sites that are added.
 6. Test out your installation:
 		ruby script/server
-7. Deployment is done via Phusion Passenger w/ Apache. 
+7. Deployment is done via Phusion Passenger w/ Apache.
+
+# Requirements
+
+This is the production environment I use on my server to run this application.
+
+* Ruby 1.8.7
+* Rails 2.3.8
+* will_paginate 2.3.15
+* Phusion Passenger 3.0.2

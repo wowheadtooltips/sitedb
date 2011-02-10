@@ -1,5 +1,24 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+	def sort_first_character(text)
+		
+		# get the count of the letter
+		count = Site.first_letter(text)
+		
+		# set the filter
+		filter = text.downcase if count > 0
+		
+		if count == 0
+			# if no sites, just show the letter
+			text.upcase
+		else
+			# otherwise, create an AJAX link to sort via the letter
+			link_to_remote text.upcase,
+				{:update => 'table', :before => "jQuery('#spinner-char').show()", :success => "jQuery('#spinner-char').hide()", :url => {:action => 'index', :params => params.merge({:filter => filter, :page => nil})}},
+				{:title => "#{count} Sites", :href => url_for(:action => 'index', :params => params.merge({:filter => filter, :page => nil}))}
+		end
+	end
+
 	def sort_site_helper(text, param)
 		key = param
 		key += "_reverse" if params[:sort] == param
