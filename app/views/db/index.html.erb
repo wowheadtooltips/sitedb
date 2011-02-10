@@ -3,8 +3,8 @@
 		<%= sort_first_character(letter.chr) %>
 		&nbsp;|&nbsp;
 	<% end %>
-	<%= link_to "Reset", {:action => 'index'} %>&nbsp;
-	<%= image_tag "spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
+	<%= sort_first_character('reset') %>&nbsp;
+	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
 </div>
 <div id="dosearch" style="float:right;display:inline;padding-right:3px;">
 	<form name="sform" action="" method="get" style="display:inline;">

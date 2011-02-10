@@ -1,6 +1,7 @@
 class DbController < ApplicationController
-	def index
-		
+	
+	# the default list/action
+	def index	
 		# for column sorting
 		sort = case params[:sort]
 			when 'name' then 'name ASC'
@@ -19,11 +20,17 @@ class DbController < ApplicationController
 		sort = 'name ASC' if params[:sort].nil?
 		params[:page] = 1 if params[:page].nil?
 		
-		# for searches
+		# see how they want to filter
 		if params[:filter].nil?
+			# for searches
 			conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
 		else
-			conditions = ["name LIKE ?", "#{params[:filter]}%"]
+			# filter by first character
+			if params[:filter] == 'reset'
+				conditions = ''
+			else
+				conditions = ["name LIKE ?", "#{params[:filter]}%"]
+			end
 		end
 
 		# pull the sites from the database
@@ -41,6 +48,7 @@ class DbController < ApplicationController
 		end
 	end
 	
+	# save the new site
 	def save
 		@site = Site.new(params[:site])
 		@site.count = 0
@@ -52,6 +60,7 @@ class DbController < ApplicationController
 		end
 	end
 	
+	# add one to the count and redirect to the uri
 	def out
 		site = Site.find(params[:id])
 		site.count += 1
@@ -61,16 +70,7 @@ class DbController < ApplicationController
 			redirect_to_index('Failed to update count')
 		end
 	end
-	
-	def sort
-		page = params[:page] || 1
-		@sites = Site.paginate(:page => page, :conditions => ['LOWER (name) LIKE ?', "#{params[:id].downcase}%"], :order => "#{sort_column} #{sort_direction}")
-		respond_to do |format|
-			format.html
-			format.xml { render :layout => false, :xml => @sites.to_xml() }
-		end
-	end
-	
+
 	def gohome
 		redirect_to 'http://wowhead-tooltips.com'
 	end
