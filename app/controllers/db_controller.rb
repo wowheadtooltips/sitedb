@@ -1,10 +1,38 @@
 class DbController < ApplicationController
-	
-	helper_method :sort_column, :sort_direction
-	
 	def index
-		page = params[:page] || 1
-		@sites = Site.paginate :page => page, :order => "#{sort_column} #{sort_direction}"
+		sort = case params[:sort]
+			when 'name' then 'name ASC'
+			when 'region' then 'region ASC'
+			when 'realm' then 'realm ASC'
+			when 'faction' then 'faction ASC'
+			when 'count' then 'count ASC'
+			when 'name_reverse' then 'name DESC'
+			when 'region_reverse' then 'region DESC'
+			when 'realm_reverse' then 'realm DESC'
+			when 'faction_reverse' then 'faction DESC'
+			when 'count_reverse' then 'count DESC'
+		end
+		
+		# for when the page is first loaded
+		sort = 'name ASC' if params[:sort].nil?
+		params[:page] = 1 if params[:page].nil?
+		
+		# for searches
+		conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
+
+		# pull the sites from the database
+		@total = Site.count(:conditions => conditions)
+		@sites = Site.paginate :page => params[:page], :per_page => 25, :conditions => conditions, :order => sort
+		
+		# use ajax to update the site list
+		if request.xml_http_request?
+			render :partial => "sites_list", :layout => false
+		else
+			respond_to do |format|
+				format.html
+				format.xml { render :layout => false, :xml => @sites.to_xml() }
+			end
+		end
 	end
 	
 	def save
@@ -31,11 +59,10 @@ class DbController < ApplicationController
 	def sort
 		page = params[:page] || 1
 		@sites = Site.paginate(:page => page, :conditions => ['LOWER (name) LIKE ?', "#{params[:id].downcase}%"], :order => "#{sort_column} #{sort_direction}")
-	end
-	
-	def search
-		page = params[:page] || 1
-		@sites = Site.paginate(:page => page, :conditions => ['LOWER (name) LIKE ?', "%#{params[:search].downcase}%"], :order => "#{sort_column} #{sort_direction}")
+		respond_to do |format|
+			format.html
+			format.xml { render :layout => false, :xml => @sites.to_xml() }
+		end
 	end
 	
 	def gohome
@@ -54,14 +81,6 @@ private
 	def redirect_to_index(msg = nil)
 		flash[:notice] = msg if msg
 		redirect_to :action => 'index'
-	end
-	
-	def sort_column
-		%w[name region realm faction count].include?(params[:sort]) ? params[:sort] : 'name'
-	end
-	
-	def sort_direction
-		%w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
 	end
 
 protected
