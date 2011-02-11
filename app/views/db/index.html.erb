@@ -1,14 +1,14 @@
 <div style="float:left;display:inline;padding-left:3px;">
 	<% (97..122).to_a.each do |letter| %>
-		<%= sort_first_character(letter.chr) %>
+		<%= sort_first_character letter.chr %>
 		&nbsp;|&nbsp;
 	<% end %>
-	<%= sort_first_character('reset') %>&nbsp;
+	<%= sort_first_character 'reset' %>&nbsp;
 	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
 </div>
 <div id="dosearch" style="float:right;display:inline;padding-right:3px;">
 	<form name="sform" action="" method="get" style="display:inline;">
-		<%= text_field_tag(:query, params['query'], :size => 10, :id => 'query' ) %>
+		<%= text_field_tag :query, params['query'], :size => 10, :id => 'query' %>
 	</form>
 	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
 </div>

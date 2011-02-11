@@ -1,56 +1,55 @@
 class SitesController < ApplicationController
-  # GET /sites
-  # GET /sites.xml
-  def index
-    @sites = Site.all
+	# the default list/action
+	def index	
+		# for column sorting
+		sort = case params[:sort]
+			when 'name' then 'name ASC'
+			when 'region' then 'region ASC'
+			when 'realm' then 'realm ASC'
+			when 'faction' then 'faction ASC'
+			when 'count' then 'count ASC'
+			when 'name_reverse' then 'name DESC'
+			when 'region_reverse' then 'region DESC'
+			when 'realm_reverse' then 'realm DESC'
+			when 'faction_reverse' then 'faction DESC'
+			when 'count_reverse' then 'count DESC'
+		end
+		
+		# for when the page is first loaded
+		sort = 'name ASC' if params[:sort].nil?
+		params[:page] = 1 if params[:page].nil?
+		
+		# see how they want to filter
+		if params[:filter].nil?
+			# for searches
+			conditions = ["name LIKE ?", "%#{params[:query]}%"] unless params[:query].nil?
+		else
+			# filter by first character
+			if params[:filter] == 'reset'
+				conditions = ''
+			else
+				conditions = ["name LIKE ?", "#{params[:filter]}%"]
+			end
+		end
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @sites }
-    end
-  end
-
-  # GET /sites/1
-  # GET /sites/1.xml
-  def show
-    @site = Site.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @site }
-    end
-  end
-
-  # GET /sites/new
-  # GET /sites/new.xml
-  def new
-    @site = Site.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @site }
-    end
-  end
+		# pull the sites from the database
+		@total = Site.count(:conditions => conditions)
+		@sites = Site.paginate :page => params[:page], :per_page => 25, :conditions => conditions, :order => sort
+		
+		# use ajax to update the site list
+		if request.xml_http_request?
+			render :partial => "sites_list", :layout => false
+		else
+			respond_to do |format|
+				format.html
+				format.xml { render :layout => false, :xml => @sites.to_xml() }
+			end
+		end
+	end
 
   # GET /sites/1/edit
   def edit
     @site = Site.find(params[:id])
-  end
-
-  # POST /sites
-  # POST /sites.xml
-  def create
-    @site = Site.new(params[:site])
-
-    respond_to do |format|
-      if @site.save
-        format.html { redirect_to(@site, :notice => 'Site was successfully created.') }
-        format.xml  { render :xml => @site, :status => :created, :location => @site }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @site.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   # PUT /sites/1

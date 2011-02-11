@@ -1,26 +1,19 @@
-<table>
-	<tr>
-		<th>ID</th>
-		<th>Website</th>
-		<th>Region</th>
-		<th>Realm</th>
-		<th>Faction</th>
-		<th>Count</th>
-		<th>Controls</th>
-	</tr>
-
-	<% @sites.each do |site| %>
-		<tr class="<%= cycle('odd', 'even') %>">
-			<td align="center"><%=h site.id %></td>
-			<td align="left"><%=h link_to site.name.gsub("\\", ""), site.uri %></td>
-			<td align="center"><%= site.region %></td>
-			<td align="center"><%=h site.realm.gsub("\\", "") %></td>
-			<td align="center"><%= site.faction %></td>
-			<td align="center"><%= site.count %></td>
-			<td align="center">
-				<%= link_to 'Edit', edit_site_path(site) %>&nbsp;
-				<%= link_to 'Delete', site, :confirm => 'Are you sure?', :method => :delete %>
-			</td>
-		</tr>
+<div style="float:left;display:inline;padding-left:3px;">
+	<% (97..122).to_a.each do |letter| %>
+		<%= sites_sort_first_character letter.chr %>
+		&nbsp;|&nbsp;
 	<% end %>
-</table>
+	<%= sites_sort_first_character 'reset' %>&nbsp;
+	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
+</div>
+<div id="dosearch" style="float:right;display:inline;padding-right:3px;">
+	<form name="sform" action="" method="get" style="display:inline;">
+		<%= text_field_tag :query, params['query'], :size => 10, :id => 'query' %>
+	</form>
+	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
+</div>
+<br /><br />
+<%= observe_field 'query', :frequency => 1, :update => 'table', :before => "jQuery('#spinner').show()", :success => "jQuery('#spinner').hide()", :url => {:controller => 'sites', :action => 'index'}, :with => 'query' %>
+<div id="table">
+	<%= render :partial => "sites_list" %>
+</div>
