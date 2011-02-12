@@ -32,6 +32,8 @@ class DbController < ApplicationController
 				conditions = ["name LIKE ?", "#{params[:filter]}%"]
 			end
 		end
+		
+		conditions = ["realm LIKE ?", "%#{params[:realm]}%"] if !params[:realm].nil? && params[:realm].downcase.gsub(' ', '') != 'sortbyrealm'
 
 		# pull the sites from the database
 		@total = Site.count(:conditions => conditions)

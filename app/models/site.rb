@@ -23,4 +23,18 @@ class Site < ActiveRecord::Base
 		@sites = self.find(:all, :conditions => ['LOWER (name) LIKE ?', "#{letter.downcase}%"], :order => 'name ASC')
 		@sites.count
 	end
+	
+	def self.get_realms
+		#realms = self.find_by_sql("SELECT `realm` FROM `sites` ORDER BY `realm` ASC")
+		sites = self.find(:all)
+		realms = []
+		x = 0
+		sites.each do |site|
+			realms[x] = site.realm.titleize.gsub('\\', '') if ! realms.nil? && ! realms.include?(site.realm.titleize.gsub('\\', ''))
+			x += 1
+		end
+		realms = realms.compact.sort
+		realms.reject(&:blank?)
+		realms.insert(0, 'Sort By Realm')
+	end
 end
