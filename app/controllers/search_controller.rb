@@ -32,7 +32,8 @@ class SearchController < ApplicationController
 			end
 		end
 		
-		# make sure region and realm are valid
+		# make sure faction, region and realm are valid
+		params[:realm] = valid_realm if !params[:realm].nil?
 		params[:region] = valid_region if !params[:region].nil?
 		params[:faction] = valid_faction if !params[:faction].nil?
 		
@@ -68,5 +69,26 @@ private
 		# SCREW YOU HORDE!
 		%w[Alliance Horde].include?(params[:faction]) ? params[:faction] : 'Alliance'
 	end
+	
+	# make sure the realm is valid
+	def valid_realm
+		realms = get_realms
+		params[:realm] = 'Bleeding Hollow' if realms.count == 0 # just in case
+		realms.include?(params[:realm].downcase.gsub('\\', '').gsub(' ', '')) ? params[:realm] : 'Bleeding Hollow' 
+	end
 
+	# get realms from mysql
+	def get_realms
+		sites = Site.find(:all)
+		realms = []
+		x = 0
+		sites.each do |site|
+			if !realms.nil? && !realms.include?(site.realm.downcase.gsub('\\', '').gsub(' ', ''))
+				realms[x] = site.realm.downcase.gsub('\\', '').gsub(' ', '')
+				x += 1
+			end
+		end
+		realms.compact.sort
+		realms.reject(&:blank?)
+	end
 end

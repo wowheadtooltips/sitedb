@@ -19,7 +19,7 @@
 	<form name="aform" action="" method="get" style="display:inline;">
 		<strong>Advanced Search:</strong>&nbsp;&nbsp;
 		<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-realm", :style => "display: none;" %>
-		<%= select_tag "realm", options_for_select(Site.get_realms) %>&nbsp;&nbsp;
+		<%= select_tag "realm", options_for_select(Site.get_realms_for_select) %>&nbsp;&nbsp;
 		<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-region", :style => "display: none;" %>
 		<%= select_tag "region", options_for_select(["Sort by Region", "US", "EU"], "Sort by Region") %>&nbsp;&nbsp;
 		<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-faction", :style => "display: none;" %>

@@ -26,7 +26,8 @@ class Site < ActiveRecord::Base
 		@sites.count
 	end
 	
-	def self.get_realms
+	# list the realms in select form
+	def self.get_realms_for_select
 		#realms = self.find_by_sql("SELECT `realm` FROM `sites` ORDER BY `realm` ASC")
 		sites = self.find(:all)
 		realms = []
