@@ -157,23 +157,7 @@ code {
 	margin:10px 0;
 }
 
-/* default forms
-form {}
-form input, form textarea, form select {
-	border:2px solid #dddddd;
-	padding:5px;
-	color:#666666;
-	font-family:Arial, Helvetica, sans-serif;
-	font-size:1.0em;
-}
-form input.formbutton {
-	background:#8D0000 url('../images/button.png') repeat-x scroll top left;
-	color:#ffffff;
-	font-size:0.9em;
-	border:1px solid #5E0000;
-	font-weight:bold;
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-} */
+/* default forms */
 .sitedb-form legend {
 	color: #fff;
 	background: #000;
@@ -216,6 +200,16 @@ div#dosearch {
 	border: 1px solid #AAAAAA;
 	min-height: 1px;
 	display: inline;
+}
+div#dosearch a:link, div#dosearch a:active, div#dosearch a:visited {
+	color: #700000;
+	text-decoration: none;
+	font-size: 0.7em;
+}
+div#dosearch a:hover {
+	color: #700000;
+	text-decoration: underline;
+	font-size: 0.7em;
 }
 .submit_search {
 	background-image: url(../images/search.png);

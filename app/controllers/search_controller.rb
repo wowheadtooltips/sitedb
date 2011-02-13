@@ -1,6 +1,6 @@
-class DbController < ApplicationController	
-	# the default list/action
-	def index	
+# handles advanced search options
+class SearchController < ApplicationController
+  def index
 		# for column sorting
 		sort = case params[:sort]
 			when 'name' then 'name ASC'
@@ -32,6 +32,15 @@ class DbController < ApplicationController
 			end
 		end
 		
+		# make sure region and realm are valid
+		params[:region] = valid_region if !params[:region].nil?
+		params[:faction] = valid_faction if !params[:faction].nil?
+		
+		# change conditions depending on which parameter was included
+		conditions = ["realm LIKE ?", "%#{params[:realm]}%"] if !params[:realm].nil? && params[:realm].downcase.gsub(' ', '') != 'sortbyrealm'
+		conditions = ["region LIKE ?", "%#{params[:region]}%"] if !params[:region].nil? && params[:region].downcase.gsub(' ', '') != 'sortbyregion'
+		conditions = ["faction LIKE ?", "%#{params[:faction]}%"] if !params[:faction].nil? && params[:faction].downcase.gsub(' ', '') != 'sortbyfaction'
+
 		# pull the sites from the database
 		@total = Site.count(:conditions => conditions)
 		@sites = Site.paginate :page => params[:page], :per_page => 25, :conditions => conditions, :order => sort
@@ -45,51 +54,19 @@ class DbController < ApplicationController
 				format.xml { render :layout => false, :xml => @sites.to_xml() }
 			end
 		end
-	end
-	
-	# save the new site
-	def save
-		@site = Site.new(params[:site])
-		@site.count = 0
-		if @site.save
-			redirect_to_index("Your site has been added.")
-		else
-			flash[:notice] = 'Failed to add site to the database.'
-			render :action => 'add'
-		end
-	end
-	
-	# add one to the count and redirect to the uri
-	def out
-		site = Site.find(params[:id])
-		site.count += 1
-		if site.save
-			redirect_to "#{site.uri}"
-		else
-			redirect_to_index('Failed to update count')
-		end
-	end
-
-	def gohome
-		redirect_to 'http://wowhead-tooltips.com'
-	end
-	
-	def forums
-		redirect_to 'http://support.wowhead-tooltips.com'
-	end
-	
-	def wiki
-		redirect_to 'http://wiki.wowhead-tooltips.com'
-	end
-	
+  end
+ 
 private
-	def redirect_to_index(msg = nil)
-		flash[:notice] = msg if msg
-		redirect_to :action => 'index'
+
+	# make sure the region is valid
+	def valid_region
+		%w[US EU].include?(params[:region]) ? params[:region] : 'US'
+	end
+	
+	# make sure the faction is valid
+	def valid_faction
+		# SCREW YOU HORDE!
+		%w[Alliance Horde].include?(params[:faction]) ? params[:faction] : 'Alliance'
 	end
 
-protected
-	# to prevent the filter from requiring login
-	def authorize
-	end
 end

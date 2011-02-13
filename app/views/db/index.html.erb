@@ -4,18 +4,14 @@
 		&nbsp;|&nbsp;
 	<% end %>
 	<%= sort_first_character 'reset' %>&nbsp;
-	<form name="rform" action="" method="get" style="display:inline;">
-		<%= select_tag "realm", options_for_select(Site.get_realms) %>
-	</form>
-	<%= observe_field 'realm', :frequency => 1, :update => 'table', :before => "jQuery('#spinner-realm').show()", :success => "jQuery('#spinner-realm').hide()", :url => {:action => 'index'}, :with => 'realm' %>
 	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
-	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-realm", :style => "display:none;" %>
 </div>
 <div id="dosearch" style="float:right;display:inline;padding-right:3px;">
 	<form name="sform" action="" method="get" style="display:inline;">
 		<%= text_field_tag :query, params['query'], :size => 10, :id => 'query' %>
 	</form>
 	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
+	<%= link_to "Advanced Search", {:controller => 'search', :action => 'index'} %>
 </div>
 <br /><br />
 <%= observe_field 'query', :frequency => 1, :update => 'table', :before => "jQuery('#spinner').show()", :success => "jQuery('#spinner').hide()", :url => {:action => 'index'}, :with => 'query' %>

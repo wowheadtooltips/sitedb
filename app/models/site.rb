@@ -1,3 +1,5 @@
+require 'titleize' # better titleize replacement => gem install titleize
+
 class Site < ActiveRecord::Base
 
 	ACCEPT_FACTION = [
@@ -35,6 +37,6 @@ class Site < ActiveRecord::Base
 		end
 		realms = realms.compact.sort
 		realms.reject(&:blank?)
-		realms.insert(0, 'Sort By Realm')
+		realms.insert(0, 'Sort by Realm')
 	end
 end
