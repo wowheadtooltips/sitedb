@@ -31,5 +31,6 @@ This is the production environment I use on my server to run this application.
 * Ruby 1.8.7
 * Rails 2.3.8
 * will_paginate 2.3.15
+* titleize 1.2.0
 * Phusion Passenger 3.0.2
 * All required gems are packaged in the `vendor` folder.
