@@ -1,0 +1,136 @@
+--- !ruby/object:Gem::Specification 
+name: titleize
+version: !ruby/object:Gem::Version 
+  hash: 31
+  prerelease: 
+  segments: 
+  - 1
+  - 2
+  - 0
+  version: 1.2.0
+platform: ruby
+authors: 
+- Grant Hollingworth
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-07-22 00:00:00 -04:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rubyforge
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 9
+        segments: 
+        - 2
+        - 0
+        - 3
+        version: 2.0.3
+  type: :development
+  version_requirements: *id001
+- !ruby/object:Gem::Dependency 
+  name: gemcutter
+  prerelease: false
+  requirement: &id002 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 11
+        segments: 
+        - 0
+        - 5
+        - 0
+        version: 0.5.0
+  type: :development
+  version_requirements: *id002
+- !ruby/object:Gem::Dependency 
+  name: hoe
+  prerelease: false
+  requirement: &id003 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 27
+        segments: 
+        - 2
+        - 5
+        - 0
+        version: 2.5.0
+  type: :development
+  version_requirements: *id003
+description: |-
+  Adds String#titleize for creating properly capitalized titles.
+  It can be called as Titleize.titleize or "a string".titleize. It is also
+  aliased as titlecase.
+  
+  The list of "small words" which are not capped comes from the New York Times 
+  Manual of Style, plus 'vs' and 'v'.
+  
+  If loaded in a Rails environment, it modifies Inflector.titleize.
+  
+  Based on TitleCase.pl by John Gruber.
+  http://daringfireball.net/2008/05/title_case
+email: 
+- grant@antiflux.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- History.txt
+- Manifest.txt
+- README.txt
+files: 
+- History.txt
+- Manifest.txt
+- README.txt
+- Rakefile
+- lib/titleize.rb
+- spec/spec.opts
+- spec/titleize_spec.rb
+- spec/spec_helper.rb
+has_rdoc: true
+homepage: http://rubygems.org/gems/titleize
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --main
+- README.txt
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: titleize
+rubygems_version: 1.4.2
+signing_key: 
+specification_version: 3
+summary: Adds String#titleize for creating properly capitalized titles
+test_files: []
+
