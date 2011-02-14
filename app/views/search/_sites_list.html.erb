@@ -37,6 +37,6 @@
 	</table>
 	<br />
 	<%= page_entries_info @sites %>
-	<%= will_paginate @sites, {:params => {:query => params[:query], :sort => params[:sort]}} %>
+	<%= will_paginate @sites, {:params => {:query => params[:query], :sort => params[:sort], :realm => params[:realm], :region => params[:region], :faction => params[:faction]}} %>
 	<br />
 <% end %>

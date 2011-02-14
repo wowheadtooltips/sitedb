@@ -7,7 +7,7 @@
 	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
 </div>
 <div id="dosearch" style="float:right;display:inline;padding-right:3px;">
-	<form name="sform" action="" method="get" style="display:inline;">
+	<form name="sform" action="" method="post" style="display:inline;">
 		<%= text_field_tag :query, params["query"], :size => 10, :id => "query" %>
 	</form>
 	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
@@ -16,7 +16,7 @@
 <br />
 <%= observe_field "query", :frequency => 1, :update => "table", :before => "jQuery('#spinner').show()", :success => "jQuery('#spinner').hide()", :url => {:controller => "search", :action => "index"}, :with => "query" %>
 <div id="advancedsort" align="left" style="display:block;padding-left:3px;margin-top:10px;margin-bottom:10px;">
-	<form name="aform" action="" method="get" style="display:inline;">
+	<form name="aform" action="" method="post" style="display:inline;">
 		<strong>Advanced Search:</strong>&nbsp;&nbsp;
 		<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-realm", :style => "display: none;" %>
 		<%= select_tag "realm", options_for_select(Site.get_realms_for_select) %>&nbsp;&nbsp;

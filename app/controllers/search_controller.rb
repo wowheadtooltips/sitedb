@@ -26,21 +26,18 @@ class SearchController < ApplicationController
 		else
 			# filter by first character
 			if params[:filter] == 'reset'
-				conditions = ''
+				conditions = nil
 			else
 				conditions = ["name LIKE ?", "#{params[:filter]}%"]
 			end
 		end
-		
-		# make sure faction, region and realm are valid
-		params[:realm] = valid_realm if !params[:realm].nil?
-		params[:region] = valid_region if !params[:region].nil?
-		params[:faction] = valid_faction if !params[:faction].nil?
-		
-		# change conditions depending on which parameter was included
-		conditions = ["realm LIKE ?", "%#{params[:realm]}%"] if !params[:realm].nil? && params[:realm].downcase.gsub(' ', '') != 'sortbyrealm'
-		conditions = ["region LIKE ?", "%#{params[:region]}%"] if !params[:region].nil? && params[:region].downcase.gsub(' ', '') != 'sortbyregion'
-		conditions = ["faction LIKE ?", "%#{params[:faction]}%"] if !params[:faction].nil? && params[:faction].downcase.gsub(' ', '') != 'sortbyfaction'
+
+		# see if they want to sort by realm
+		conditions = ["realm LIKE ?", "%#{valid_realm}%"] if !params[:realm].nil? && params[:realm].downcase.gsub(' ', '') != 'sortbyrealm'
+		# or perhaps region?
+		conditions = ["region LIKE ?", "%#{valid_region}%"] if !params[:region].nil? && params[:region].downcase.gsub(' ', '') != 'sortbyregion'
+		# or maybe faction?
+		conditions = ["faction LIKE ?", "%#{valid_faction}%"] if !params[:faction].nil? && params[:faction].downcase.gsub(' ', '') != 'sortbyfaction'
 
 		# pull the sites from the database
 		@total = Site.count(:conditions => conditions)
