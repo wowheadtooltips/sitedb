@@ -26,6 +26,10 @@ tr.odd {
 tr.even {
 	background-color: #d3d3d3;
 }
+span.highlight {
+	background: #B30000;
+	color: #FFFFFF;
+}
 
 /* notices/errors */
 #notice {
@@ -160,7 +164,7 @@ code {
 /* default forms */
 .sitedb-form legend {
 	color: #fff;
-	background: #000;
+	background: #B30000;
 	padding: 0.2em 1em;
 	font-family: sans-serif;
 	font-weight: bold;
@@ -186,7 +190,7 @@ code {
 	padding:5px;
 	color:#666666;
 }
-.sitedb-form .submit, .sitedb-form .reset {
+.sitedb-form .submit, .sitedb-form .reset, .sitedb-form button {
 	margin-left: 4em;
 	width: 150px;
 }

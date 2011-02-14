@@ -36,6 +36,11 @@ class DbController < ApplicationController
 		@total = Site.count(:conditions => conditions)
 		@sites = Site.paginate :page => params[:page], :per_page => 25, :conditions => conditions, :order => sort
 		
+		# highlight the search query
+		if !params[:query].nil? && !params[:query].empty?
+			@sites.each {|site| site.name.gsub!("#{params[:query]}", "<span class=\"highlight\">#{params[:query]}</span>")}
+		end
+		
 		# use ajax to update the site list
 		if request.xml_http_request?
 			render :partial => "sites_list", :layout => false

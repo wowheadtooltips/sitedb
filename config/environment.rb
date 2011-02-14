@@ -42,3 +42,9 @@ Rails::Initializer.run do |config|
   config.gem 'titleize', :lib => 'titleize', :source => 'http://rubygems.org'
 end
 ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"fieldWithErrors\">#{html_tag}</span>" }
+
+# automatically sanitize input data before adding to mysql
+require "#{RAILS_ROOT}/app/models/cleaner"
+class ActiveRecord::Base
+	include Cleaner
+end

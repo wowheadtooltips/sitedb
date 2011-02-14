@@ -1,0 +1,51 @@
+<div style="float:left;display:inline;padding-left:3px;">
+	<% (97..122).to_a.each do |letter| %>
+		<%= sort_first_character letter.chr %>
+		&nbsp;|&nbsp;
+	<% end %>
+	<%= sort_first_character "reset" %>&nbsp;
+	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
+</div>
+<div id="dosearch" style="float:right;display:inline;padding-right:3px;">
+	<form name="sform" action="" method="post" style="display:inline;">
+		<%= text_field_tag :query, params["query"], :size => 10, :id => "query" %>
+	</form>
+	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
+	<%= link_to "Cancel", {:controller => "db", :action => "index"} %>
+</div>
+<br />
+<%= observe_field "query", :frequency => 1, :update => "table", :before => "jQuery('#spinner').show()", :success => "jQuery('#spinner').hide()", :url => {:controller => "search", :action => "index"}, :with => "query" %>
+<div id="advancedsort" class="sitedb-form" align="left" style="display:block;padding-left:3px;margin-top:10px;margin-bottom:10px;">
+	<fieldset>
+		<legend>Advanced Sort Options</legend>
+		<form name="aform" action="" method="post" style="display:inline;">
+			<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-realm", :style => "display: none;" %>
+			<%= select_tag "realm", options_for_select(Site.get_realms_for_select) %>&nbsp;&nbsp;
+			<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-region", :style => "display: none;" %>
+			<%= select_tag "region", options_for_select(["Sort by Region", "US", "EU"], "Sort by Region") %>&nbsp;&nbsp;
+			<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "search-faction", :style => "display: none;" %>
+			<%= select_tag "faction", options_for_select(["Sort by Faction", "Alliance", "Horde"], "Sort by Faction") %>&nbsp;&nbsp;
+			<%= link_to "Reset", :controller => "search", :action => "index" %>
+		</form>
+		<br /><br />
+		<%= observe_field "realm", :frequency => 1, :update => "table", :before => "jQuery('#search-realm').show()", :success => "jQuery('#search-realm').hide()", :url => {:controller => "search", :action => "index"}, :with => "realm" %>
+		<%= observe_field "region", :frequency => 1, :update => "table", :before => "jQuery('#search-region').show()", :success => "jQuery('#search-region').hide()", :url => {:controller => "search", :action => "index"}, :with => "region" %>
+		<%= observe_field "faction", :frequency => 1, :update => "table", :before => "jQuery('#search-faction').show()", :success => "jQuery('#search-faction').hide()", :url => {:controller => "search", :action => "index"}, :with => "faction" %>
+	</fieldset>
+</div>
+<div id="advancedsearch" class="sitedb-form" align="left" style="display:block;padding-left:3px;margin-top:10px;margin-bottom:10px;">
+	<fieldset>
+		<legend>Advanced Search Options</legend>
+		<% form_for :search, :url => {:controller => 'search', :action => 'advanced'} do |form| %>
+			<%= form.text_field :query, :size => 40 %>&nbsp;&nbsp;
+			<%= form.select :realm, options_for_select(Site.get_realms_for_select), :prompt => "Select a Realm" %>&nbsp;&nbsp;
+			<%= form.select :region, Site::ACCEPT_REGION, :prompt => "Select a Region" %>&nbsp;&nbsp;
+			<%= form.select :faction, Site::ACCEPT_FACTION, :prompt => "Select a Faction" %>&nbsp;&nbsp;
+			<%= submit_tag "Search!", :class => "submit" %>&nbsp;
+		<% end %>
+		<br />
+	</fieldset>
+</div>
+<div id="table">
+	<%= render :partial => "sites_list" %>
+</div>

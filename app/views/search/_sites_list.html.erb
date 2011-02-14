@@ -1,30 +1,28 @@
-<% if @total == 0 %>
-	<p>No records found...</p>
-<% else %>
-	<table>
-		<tr>
-			<th>
-				<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-name", :style => "display:none;") %>
-				<%= sort_site_helper "Name", "name" %>
-			</th>
-			<th>
-				<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-region", :style => "display:none;") %>
-				<%= sort_site_helper "Region", "region" %>
-			</th>
-			<th>
-				<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-realm", :style => "display:none;") %>
-				<%= sort_site_helper "Realm", "realm" %>
-			</th>
-			<th>
-				<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-faction", :style => "display:none;") %>
-				<%= sort_site_helper "Faction", "faction" %>
-			</th>
-			<th>
-				<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-count", :style => "display:none;") %>
-				<%= sort_site_helper "Count", "count" %>
-			</th>
-		</tr>
-	
+<table>
+	<tr>
+		<th>
+			<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-name", :style => "display:none;") %>
+			<%= sort_site_helper "Name", "name" %>
+		</th>
+		<th>
+			<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-region", :style => "display:none;") %>
+			<%= sort_site_helper "Region", "region" %>
+		</th>
+		<th>
+			<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-realm", :style => "display:none;") %>
+			<%= sort_site_helper "Realm", "realm" %>
+		</th>
+		<th>
+			<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-faction", :style => "display:none;") %>
+			<%= sort_site_helper "Faction", "faction" %>
+		</th>
+		<th>
+			<%= image_tag("spinner.gif", :align => "absmiddle", :border => 0, :id => "spinner-count", :style => "display:none;") %>
+			<%= sort_site_helper "Count", "count" %>
+		</th>
+	</tr>
+
+	<% if @total > 0 %>
 		<% @sites.each do |site| %>
 			<tr class="<%= cycle('odd', 'even') %>">
 				<td align="left"><%= link_to site.name.gsub('\\', '').titleize, out_url(site.id) %></td>
@@ -34,9 +32,9 @@
 				<td align="center"><%= site.count %></td>
 			</tr>
 		<% end %>
-	</table>
-	<br />
-	<%= page_entries_info @sites %>
-	<%= will_paginate @sites, {:params => {:query => params[:query], :sort => params[:sort], :realm => params[:realm], :region => params[:region], :faction => params[:faction]}} %>
-	<br />
-<% end %>
+	<% end %>
+</table>
+<br />
+<%= page_entries_info @sites %>
+<%= will_paginate @sites, {:params => {:query => params[:query], :sort => params[:sort], :realm => params[:realm], :region => params[:region], :faction => params[:faction]}} %>
+<br /><br />
