@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  siteid: 1
+  ip: MyString
+  hostname: MyString
+  visited: 2011-02-14 17:33:33
+
+two:
+  siteid: 1
+  ip: MyString
+  hostname: MyString
+  visited: 2011-02-14 17:33:33

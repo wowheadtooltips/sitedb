@@ -43,8 +43,13 @@ Rails::Initializer.run do |config|
 end
 ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"fieldWithErrors\">#{html_tag}</span>" }
 
-# automatically sanitize input data before adding to mysql
+# 3rd party requires
 require "#{RAILS_ROOT}/app/models/cleaner"
+require "titleize"
+require "will_paginate"
+require "socket"
+
+# automatically sanitize input data before adding to mysql
 class ActiveRecord::Base
 	include Cleaner
 end

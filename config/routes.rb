@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :trackings
+
   map.resources :users
 
   map.resources :sites
@@ -46,6 +48,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
   
   # custom routes
+  map.details "details/:id", :controller => 'trackings', :action => 'details'	# tracking details
+  map.track 'track', :controller => 'trackings', :action => 'index'
   map.search "search.:format", {:controller => 'search', :action => 'index'}	# searching
   map.out 'out/:id', :controller =>'db', :action => 'out'			# redirect
   map.sort 'sort/:id', :controller => 'db', :action => 'sort'		# sorting

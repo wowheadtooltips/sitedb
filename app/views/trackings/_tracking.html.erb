@@ -1,0 +1,23 @@
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>URI</th>
+		<th>Visitors</th>
+	</tr>
+
+	<% if @total > 0 %>
+		<% @sites.each do |site| %>
+			<tr class="<%= cycle('odd', 'even') %>">
+				<td align="center"><%= site.id %></td>
+				<td align="left"><%= link_to site.name.gsub('\\', '').titleize, details_url(site.id) %></td>
+				<td align="center"><%= link_to site.uri, out_url(site.id) %></td>
+				<td align="center"><%= site.visitors %>&nbsp;(<%= site.count %>)</td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+<br />
+<%= page_entries_info @sites %>
+<%= will_paginate @sites, :params => {:page => params[:page]} %>
+<br /><br />

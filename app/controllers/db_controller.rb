@@ -68,8 +68,13 @@ class DbController < ApplicationController
 	def out
 		site = Site.find(params[:id])
 		site.count += 1
+		tracking = Tracking.new({:siteid => site.id, :ip => request.remote_ip, :hostname => Socket.getaddrinfo(request.remote_ip, nil)[0][2], :visited => Time.new})
 		if site.save
-			redirect_to "#{site.uri}"
+			if tracking.save
+				redirect_to "#{site.uri}"
+			else
+				redirect_to_index("Failed to update tracking data.")
+			end
 		else
 			redirect_to_index('Failed to update count')
 		end

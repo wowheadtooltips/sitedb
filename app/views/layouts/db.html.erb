@@ -62,7 +62,10 @@
 						Powered by <%= link_to 'Ruby on Rails', 'http://rubyonrails.org' %><br />
 						<a href="http://validator.w3.org/check/referer" title="valid XHTML">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer" title="valid CSS">CSS</a>
 						<% if session[:user_id] %>
-							<br /><strong>Manage:</strong>&nbsp;<%= link_to 'Sites', {:controller => 'sites', :action => 'index' } %>&nbsp;|&nbsp;<%= link_to 'Users', {:controller => 'users', :action => 'index'} %>
+							<br /><strong>Manage:</strong>&nbsp;
+							<%= link_to 'Sites', {:controller => 'sites', :action => 'index' } %>&nbsp;|&nbsp;
+							<%= link_to 'Users', {:controller => 'users', :action => 'index'} %>&nbsp;|&nbsp;
+							<%= link_to 'Tracking', {:controller => 'trackings', :action => 'index'} %>
 						<% end %>
 					</p> 
 				</div>

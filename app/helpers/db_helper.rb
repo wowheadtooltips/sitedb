@@ -1,5 +1,3 @@
-require 'titleize'
-
 module DbHelper
 	# sort them by first character (A, B, C, etc.)
 	def sort_first_character(text)

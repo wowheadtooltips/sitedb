@@ -1,0 +1,22 @@
+<table>
+	<tr>
+		<th>ID</th>
+		<th>IP</th>
+		<th>Hostname</th>
+		<th>Date/Time</th>
+	</tr>
+
+	<% if @total > 0 %>
+		<% @trackings.each do |track| %>
+			<tr class="<%= cycle('odd', 'even') %>">
+				<td align="center"><%= track.id %></td>
+				<td align="center"><%= track.ip %></td>
+				<td align="center"><%= track.hostname %></td>
+				<td align="center"><%= format_date(track.visited.to_s) %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+<br />
+<%= will_paginate @trackings, :params => {:page => params[:page]} %>
+<br /><br />

@@ -1,0 +1,21 @@
+<div style="float:left;display:inline;padding-left:3px;">
+	<% (97..122).to_a.each do |letter| %>
+		<%= sort_first_character letter.chr %>
+		&nbsp;|&nbsp;
+	<% end %>
+	<%= sort_first_character "reset" %>&nbsp;
+	<%= image_tag "spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner-char", :style => "display:none;" %>
+</div>
+<div id="dosearch" style="float:right;display:inline;padding-right:3px;">
+	<form name="sform" action="" method="post" style="display:inline;">
+		<%= text_field_tag :query, params["query"], :size => 10, :id => "query" %>
+	</form>
+	<%= image_tag("spinner-search.gif", :align => "absmiddle", :border => 0, :id => "spinner", :style => "display: none;" ) %>
+	<%= link_to "Cancel", {:controller => "db", :action => "index"} %>
+</div>
+<br />
+<%= observe_field "query", :frequency => 1, :update => "table", :before => "jQuery('#spinner').show()", :success => "jQuery('#spinner').hide()", :url => {:controller => "search", :action => "index"}, :with => "query" %>
+<br />
+<div id="table">
+	<%= render :partial => "tracking" %>
+</div>

@@ -1,6 +1,6 @@
-require 'titleize' # better titleize replacement => gem install titleize
-
 class Site < ActiveRecord::Base
+	belongs_to :db
+	belongs_to :tracking
 
 	ACCEPT_FACTION = [
 		['Alliance',	'Alliance'],
